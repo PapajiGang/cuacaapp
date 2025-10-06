@@ -8,96 +8,68 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
-
-  <!-- Custom Style -->
-  <style>
-    .custom-placeholder::placeholder {
-      color: rgba(255, 255, 255, 0.7);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in { animation: fadeIn 0.6s ease-in-out forwards; }
-    .card-hover:hover { transform: scale(1.03); transition: transform 0.3s ease-in-out; }
-  </style>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body class="bg-gradient-to-tr from-[#1e3c72] to-[#2a5298] min-h-screen flex items-center justify-center p-6">
 
-  <!-- Kartu Cuaca -->
-  <div class="backdrop-blur-2xl bg-white/10 border border-white/20 shadow-2xl rounded-3xl p-8 w-full max-w-md text-white transition-all duration-300 card-hover">
-    <!-- Judul -->
-    <h1 class="text-4xl font-extrabold text-center mb-6 drop-shadow-lg tracking-wide">
-      <i class="fas fa-cloud-sun-rain mr-2 text-yellow-300"></i>
-      Aplikasi Cuaca
-    </h1>
+  <!-- Grid Layout -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl">
+    
+    <!-- Aplikasi Cuaca -->
+    <div class="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 text-white">
+      <h1 class="text-2xl font-bold text-center mb-4">🌦️ APLIKASI CUACA</h1>
 
-    <!-- Form Pencarian -->
-    <div class="flex rounded-full overflow-hidden shadow-lg mb-8 border border-white/20 backdrop-blur-md">
-      <input
-        type="text"
-        id="cityInput"
-        placeholder="Cari kota..."
-        class="custom-placeholder w-full px-5 py-3 bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60"
-      />
-      <button
-        id="searchBtn"
-        class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 px-6 py-3 transition-all duration-200"
-      >
-        <i class="fas fa-search text-white"></i>
-      </button>
-    </div>
+      <!-- Form -->
+      <div class="flex rounded-full overflow-hidden shadow-md mb-6">
+        <input id="cityInput" type="text" placeholder="Masukkan nama kota" 
+          class="custom-placeholder w-full px-4 py-2 bg-white/20 text-white focus:outline-none" />
+        <button id="searchBtn" class="bg-blue-600 hover:bg-blue-700 px-4">
+          Cari
+        </button>
+      </div>
 
-    <!-- Info Cuaca -->
-    <div id="weatherInfo" class="hidden text-center animate-fade-in">
-      <h2 id="cityName" class="text-2xl font-semibold mb-3">Nama Kota</h2>
-      <img
-        id="weatherIcon"
-        src="https://placehold.co/120x120"
-        alt="Icon Cuaca"
-        class="w-28 h-28 mx-auto mb-4 drop-shadow-xl animate-bounce"
-      />
-      <p id="temperature" class="text-5xl font-extrabold mb-2">--°C</p>
-      <p id="description" class="text-lg capitalize text-white/80">Kondisi</p>
-
-      <!-- Detail Tambahan -->
-      <div class="grid grid-cols-2 gap-4 mt-8">
-        <div class="flex flex-col items-center bg-white/10 p-4 rounded-2xl shadow-inner hover:bg-white/20 transition">
-          <i class="fas fa-tint fa-2x mb-2 text-blue-300"></i>
-          <p id="humidity" class="font-bold text-lg">--%</p>
-          <p class="text-xs">Kelembapan</p>
-        </div>
-        <div class="flex flex-col items-center bg-white/10 p-4 rounded-2xl shadow-inner hover:bg-white/20 transition">
-          <i class="fas fa-wind fa-2x mb-2 text-cyan-300"></i>
-          <p id="windSpeed" class="font-bold text-lg">-- km/h</p>
-          <p class="text-xs">Angin</p>
+      <!-- Info Cuaca -->
+      <div id="weatherInfo" class="hidden text-center">
+        <h2 id="cityName" class="text-xl font-semibold mb-2">Nama Kota</h2>
+        <img id="weatherIcon" src="https://placehold.co/100x100" alt="Icon Cuaca" class="mx-auto mb-2" />
+        <p id="temperature" class="text-4xl font-bold mb-2">--°C</p>
+        <p id="description" class="text-lg capitalize">Kondisi</p>
+        
+        <div class="flex justify-between mt-4 bg-white/10 p-3 rounded-xl text-sm">
+          <div>
+            <p>Kelembapan: <span id="humidity">--%</span></p>
+          </div>
+          <div>
+            <p>Angin: <span id="windSpeed">-- km/h</span></p>
+          </div>
         </div>
       </div>
+
+      <!-- Pesan -->
+      <p id="initialMessage" class="text-center mt-4 text-white/70">Masukkan kota untuk melihat cuaca</p>
+      <p id="errorMessage" class="hidden mt-4 text-center bg-red-500/60 px-3 py-2 rounded">Kota tidak ditemukan</p>
     </div>
 
-    <!-- Pesan Error -->
-    <div
-      id="errorMessage"
-      class="hidden mt-6 text-center bg-red-500/70 text-white px-4 py-2 rounded-xl font-medium shadow animate-fade-in"
-    >
-      ❌ Kota tidak ditemukan. Silakan coba lagi.
-    </div>
-
-    <!-- Pesan Awal -->
-    <div
-      id="initialMessage"
-      class="text-center mt-10 text-white/70 italic text-sm"
-    >
-      Masukkan nama kota untuk melihat cuaca saat ini 🌍
+    <!-- Google Maps -->
+    <div class="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 text-white">
+      <h2 class="text-2xl font-bold text-center mb-4">📍 LOCATION</h2>
+    
+      <!-- Iframe Google Maps -->
+      <div class="w-full h-64 rounded-xl overflow-hidden shadow-lg">
+        <iframe
+          id="mapFrame"
+          class="w-full h-full"
+          style="border:0;"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Indonesia&output=embed">
+        </iframe>
+      </div>
     </div>
   </div>
 
-  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
