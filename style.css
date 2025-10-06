@@ -1,15 +1,58 @@
-* Gaya kustom untuk efek glassmorphism dan font */
 body {
-    font-family: 'Inter', sans-serif;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-.weather-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); /* Dukungan untuk Safari */
-    border: 1px solid rgba(255, 255, 255, 0.2);
+
+.container {
+  display: flex;
+  gap: 20px;
 }
-/* Mengubah warna placeholder agar lebih terlihat */
+
+.card {
+  background: #4f6ef7;
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 280px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+input {
+  width: 80%;
+  padding: 8px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background: #222;
+  color: white;
+  cursor: pointer;
+}
+
+.map {
+  background: black;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding: 40px 0;
+}
+
 .custom-placeholder::placeholder {
-    color: #d1d5db; /* gray-300 */
-    opacity: 1;
+  color: rgba(255, 255, 255, 0.7);
 }
